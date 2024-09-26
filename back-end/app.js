@@ -78,5 +78,25 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+// a route to handle the about page
+app.get('/about', async (req, res) =>{
+
+  try {
+
+    const aboutData = {
+      description: "Hi my name is Kahmeeah Obey.",
+      imageurl: "google.com"
+    
+    }
+    
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve messages from the database',
+    })
+  }
+})
+
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!
