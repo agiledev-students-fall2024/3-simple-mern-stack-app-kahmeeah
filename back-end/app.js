@@ -78,16 +78,22 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+// serve static images from public
+app.use(express.static('public'))
+
+
 // a route to handle the about page
 app.get('/about', async (req, res) =>{
 
   try {
 
     const aboutData = {
-      description: "Hi my name is Kahmeeah Obey.",
-      imageurl: "google.com"
+      description: "Hi my name is Kahmeeah Obey. I am a student at NYU studying CS and a single mother of my son(cat).",
+      imageurl: "http://localhost:5002/me.jpg"
     
     }
+
+    res.json(aboutData);
     
   } catch (err) {
     console.error(err)
