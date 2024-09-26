@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
 import './Home.css'
 
 /**
@@ -7,15 +8,41 @@ import './Home.css'
  * @returns The contents of this component, in JSX form.
  */
 const About = props => {
-  return (
-    <>
-      <h1>Hello and welcome!</h1>
-      <p>This is a full MERN-stack app, whether you like it or not!</p>
-      
-    </>
-  )
-}
+    const [aboutData, setAboutData] = useState(null);
+  
+    useEffect(() => {
+      fetch('http://localhost:5002/about')
+        .then(response => response.json())
+        .then(data => setAboutData(data))
+        .catch(error => console.error('Error fetching About Us data:', error));
+    }, []);
+  
+    if (!aboutData) {
+      return <p>Loading...</p>;
+    }
+  
+    return (
+      <>
+        <h1>{aboutData.title}</h1>
+
+        <img 
+        src={aboutData.imageurl} 
+        alt="About Us" 
+        style={{ width: '300px', height: 'auto', borderRadius: '8px' }} 
+      />
+        <p>{aboutData.description}</p>
+        {/* <img src={aboutData.imageurl} alt="About Us" /> */}
+
+       
+      </>
+    );
+  }
 
 // make this component available to be imported into any other file
 export default About
+
+
+
+
+
 
